@@ -1,12 +1,14 @@
 const asyncHandler = (func) => async (req, res, next) => {
     try {
-        await func(req, res, next)
+        await func(req, res, next);
     } catch (error) {
-        res.status(error.code || 500).json({
+        const statusCode = (Number.isInteger(error.code) && error.code >= 100 && error.code <= 599) ? error.code : 500;
+        res.status(statusCode).json({
             success: false,
             message: error.message
-        })
+        });
     }
-}
+};
+
 
 export { asyncHandler }

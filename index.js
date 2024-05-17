@@ -1,11 +1,9 @@
 // require('dotenv').config({ path: './env' })
-import dotenv from "dotenv";
+import "dotenv/config.js"
 import mongoose from "mongoose";
-import { DB_NAME } from "./constants.js";
-import connectDB from "./db/index.js";
-import app from "./app.js";
-dotenv.config()
-
+import { DB_NAME } from "./src/constants.js";
+import connectDB from "./src/db/index.js";
+import app from "./src/app.js";
 
 connectDB()
 .then(() => {
@@ -13,12 +11,15 @@ connectDB()
         console.log(`index.js ran into a Error: ${error}`)
     })
     app.listen(process.env.PORT || 8000, () => {
-        console.log(`index.js is listenting on Port: ${process.env.PORT}`)
+        // console.log(`index.js is listenting on Port: ${process.env.PORT}`)
     })
 })
 .catch((e) => {
     console.error(`index.js couldnt connect to MongoDB: ${e}`);
 })
+// console.log(process.env.CLOUDINARY_CLOUD_NAME)
+// console.log(process.env.CLOUDINARY_API_NAME)
+// console.log(process.env.CLOUDINARY_API_SECERT)
 
 
 
